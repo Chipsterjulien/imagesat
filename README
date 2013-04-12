@@ -1,0 +1,18 @@
+# ------------ Freyermuth Julien ------------
+# Email : julien.chipster@gmail.com
+#
+# ------------ Imagesat.py ------------
+# Language : python v3
+# Depend : yaml-python, python-requests
+# Description : Daemon that can download satellite images
+# Long description : It's a python's script who download some pictures into /tmp directory (see imagesat_example.conf) and you can display them with conky or conky like (dzen2, ...)
+#                    This script can search, with regexp, a picture to download on html page, even name of picture change all the time
+#
+# ** Changelog
+#
+#    v0.3 - First changelog
+#         - Use python-requests instead of urllib
+#         - Rewrite of sleep function
+#         - Solve some bugs
+#
+# **

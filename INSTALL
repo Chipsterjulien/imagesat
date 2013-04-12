@@ -1,0 +1,24 @@
+# How to install
+# ven. 12 avril 2013 à 13h31
+
+
+1. Copy imagesat.py to /usr/bin/imagesat
+
+2. Copy imagesat_example.conf to /etc
+
+3. If you use systemd, copy system_d to/usr/lib/systemd/system/imagesat.service
+
+4. Create /var/log/imagesat directory
+
+5. Create imagesat group (you prefere don't use a root process) :
+		getent group imagesat &>/dev/null || groupadd -r -g 464 imagesat >/dev/null
+		getent passwd imagesat &>/dev/null || useradd -r -u 464 -g imagesat -d /tmp -s /bin/bash >/dev/null imagesat
+
+6. Fixing some right :
+		chmod 644 "/etc/imagesat_example.conf"
+		chmod 755 "/var/log/imagesat"
+		chmod 755 "/usr/bin/imagesat"
+
+7. Fixing membership :
+		chown imagesat: "/var/log/imagesat"
+		chown imagesat: "/etc/imagesat_example.conf"

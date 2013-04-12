@@ -1,0 +1,14 @@
+[Unit]
+Description=Daemon that can download satellite images
+Wants=network.target
+After=syslog.target
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/imagesat
+Group=imagesat
+Type=simple
+User=imagesat
+
+[Install]
+WantedBy=multi-user.target

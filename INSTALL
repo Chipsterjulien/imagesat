@@ -1,6 +1,13 @@
-# How to install
-# ven. 12 avril 2013 à 13h31
+Thanks for downloading imagesat.
 
+To install it, make sure you have Python 3.3 or greater installed. Then run
+this command from the command prompt:
+
+	python setup.py install (in coding)
+
+If you're upgrading from a previous version, you need to remove it first.
+
+AS AN ALTERNATIVE, you can just:
 
 1. Copy imagesat.py to /usr/bin/imagesat
 

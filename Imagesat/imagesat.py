@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+__author__    = "Julien Freyermuth"
+__copyright__ = "Copyright (c) 2013, Julien Freyermuth"
+__license__   = "GPL v3"
+__version__   = "0.3"
+
+
 import sys, os, time, Image, yaml, requests, logging, urllib, io
-
-# Depend of python-yaml, python-imaging and python-requests
-
-
-
 
 
 class Img_info:

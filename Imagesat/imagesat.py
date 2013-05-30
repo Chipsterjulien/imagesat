@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-__author__    = "Julien Freyermuth"
-__copyright__ = "Copyright (c) 2013, Julien Freyermuth"
-__license__   = "GPL v3"
-__version__   = "0.3"
+__author__           = "Julien Freyermuth"
+__copyright__        = "Copyright (c) 2013, Julien Freyermuth"
+__license__          = "GPL v3"
+__version__          = "0.3"
+__description__      = "Daemon that can download satellite image"
+__long_description__ = "It's a python's script who download some pictures into /tmp directory (see imagesat_example.conf) and you can display them with conky or conky like (dzen2, ...). This script can search, with regexp, a picture to download on html page, even name of picture change all the time"
 
 
 import sys, os, time, Image, yaml, requests, logging, urllib, io

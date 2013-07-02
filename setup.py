@@ -40,15 +40,8 @@ CLASSIFIERS = [
 ]
 
 
-DATA_FILES = [('config', ['cfg/imagesat_example.conf']),
-              ('/usr/lib/systemd/system', ['cfg/system_d'])]
-#DATA = [(join('share', 'habilitation') + sep + item[0], item[1]) for item in files('data')]
-#DATA = [('bitmaps', [
-#    'data/Images/Cadenas.png',
-#    'data/Images/Casque.png',
-#       ])]
-#PACKAGES      = [ 'habilitation', ]
-#
+DATA_FILES = [('/etc/imagesat', ['cfg/imagesat_example.conf']),
+              ('/usr/lib/systemd/system', ['cfg/imagesat.service'])]
 SCRIPTS = ['imagesat', ]
 
 setup(
@@ -62,9 +55,6 @@ setup(
     license          = LICENSE,
     platforms        = PLATFORMS,
     data_files       = DATA_FILES,
-#    data_files       = DATA,
-#    packages_data    = {'habilitation': ['data/Images/*']},
-#    packages         = PACKAGES,
     packages         = find_packages(),
     include_package_data = True,
     scripts          = SCRIPTS,

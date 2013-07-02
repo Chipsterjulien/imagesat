@@ -4,4 +4,5 @@
         - Use python-requests instead of urllib
         - Rewrite of sleep function
         - Solve some bugs
+        - Have some changes to follow pep8
 **

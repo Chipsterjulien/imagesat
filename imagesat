@@ -31,7 +31,7 @@ from Imagesat.download import download
 
 list_picture = []
 error_file   = "/var/log/imagesat/error.log"
-conf_file    = "/etc/imagesat.conf"
+conf_file    = "/etc/imagesat/imagesat.conf"
 
 # Checking if have writting rights on error_file
 (path, f) = os.path.split(error_file)

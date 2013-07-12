@@ -20,7 +20,7 @@ import requests
 import urllib
 import io
 
-from Imagesat.mylog import logging
+from Imagesat.mylog import logger, activity
 from Imagesat.img_info import Img_info
 from Imagesat.download import download
 
@@ -30,24 +30,23 @@ from Imagesat.download import download
 ############
 
 list_picture = []
-error_file   = "/var/log/imagesat/error.log"
 conf_file    = "/etc/imagesat/imagesat.conf"
 
 # Checking if have writting rights on error_file
-(path, f) = os.path.split(error_file)
+(path, f) = os.path.split(activity)
 if not os.access(path, os.W_OK):
-    print("You don't have the right permissions on " + error_file
-                    + " !", file=sys.stderr)
-    sys.exit(2)
+    logger.warning("You don't have the right permissions on " + activity
+                   + " !")
+    sys.exit(1)
 
 # Check if config file exist and check if have reading rights on this file
 if not os.path.isfile(conf_file):
-    logging.warning("The \"" + conf_file + "\" don't exist !")
-    sys.exit(2)
+    logger.warning("The \"" + conf_file + "\" don't exist !")
+    sys.exit(1)
 if not os.access(conf_file, os.R_OK):
-    logging.warning("You don't have the right permissions to read \""
-                    + conf_file + "\" !")
-    sys.exit(2)
+    logger.warning("You don't have the right permissions to read \""
+                   + conf_file + "\" !")
+    sys.exit(1)
 
 # Read config file
 data = str()
@@ -57,7 +56,7 @@ try:
     file_yaml.close()
 except yaml.parser.ParserError as e:
     print(e)
-    sys.exit(2)
+    sys.exit(1)
 
 # Store data
 try:
@@ -80,17 +79,17 @@ try:
                 elif key == 'base_url':
                     picture.base = val
                 else:
-                    logging.warning("In config file, \"" + key
-                                    + "\" is unknown !")
+                    logger.warning("In config file, \"" + key
+                                   + "\" is unknown !")
         list_picture.append(picture)
 except AttributeError as e:
-    logging.error("There is a big mistake in config file. See the example !")
+    logger.error("There is a big mistake in config file. See the example !")
     sys.exit(1)
 
 # Check if number of data is different of 0
 if len(list_picture) == 0:
-    logging.critical("The file \"" + conf_file + "\" is empty !")
-    sys.exit(2)
+    logger.critical("The file \"" + conf_file + "\" is empty !")
+    sys.exit(1)
 
 # Find short time to sleep
 t = []
@@ -112,11 +111,11 @@ while 1:
         if os.path.isfile(pic.path):
             # Check writting access
             if not os.access(pic.path, os.W_OK):
-                logging.warning("You don't have write permissions on \""
-                                + pic.path + "\" !")
+                logger.warning("You don't have write permissions on \""
+                               + pic.path + "\" !")
                 del list_picture[i]
                 if len(list_picture) == 0:
-                    logging.error("There is no picture in the list  \
+                    logger.error("There is no picture in the list  \
                                   since there is a mistake in the config  \
                                   file, so I'll stop !")
                     sys.exit(2)
@@ -139,14 +138,14 @@ while 1:
                 page = download(pic.url)
 
                 if page.status_code != requests.codes.ok:
-                    logging.warning(pic.url + " isn't a valid url ! Error  \
-                                    code : " + str(page.status_code))
+                    logger.warning(pic.url + " isn't a valid url ! Error  \
+                                   code : " + str(page.status_code))
                     del list_picture[i]
                     if len(list_picture) == 0:
-                        logging.error("There is no picture in the list  \
+                        logger.error("There is no picture in the list  \
                                       since there is a mistake in the  \
                                       config file, so I'll stop !")
-                        sys.exit(2)
+                        sys.exit(1)
                     else:
                         copy_time2sleep = 0.1
                         continue
@@ -161,13 +160,13 @@ while 1:
             req = download(pic.url)
 
             if req.status_code != requests.codes.ok:
-                logging.warning(pic.url + " isn't a valid url ! Error code : "
-                                + str(page.status_code))
+                logger.warning(pic.url + " isn't a valid url ! Error code : "
+                               + str(page.status_code))
                 del list_picture[i]
                 if len(list_picture) == 0:
-                    logging.error("There is no picture in the list since  \
-                                  there is a mistake in the config file, so  \
-                                  I'll stop !")
+                    logger.error("There is no picture in the list since  \
+                                 there is a mistake in the config file, so  \
+                                 I'll stop !")
                     sys.exit(2)
                 else:
                     copy_time2sleep = 0.1

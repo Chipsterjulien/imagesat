@@ -13,7 +13,7 @@ import sys
 import os
 
 from Imagesat.number import is_number
-from Imagesat.mylog import logging
+from Imagesat.mylog import logger
 
 
 class Img_info:
@@ -49,9 +49,9 @@ class Img_info:
             if is_number(val):
                 self._crop.append(int(val))
             else:
-                logging.critical("In " + self._path + " \"crop: " + c
-                                 + "\" is incorrect !")
-                sys.exit(2)
+                logger.warning("In " + self._path + " \"crop: " + c
+                               + "\" is incorrect !")
+                sys.exit(1)
 
     def _set_path(self, p):
         (path, f) = os.path.split(p)
@@ -59,9 +59,9 @@ class Img_info:
             path = os.path.expanduser('~')
 
         if not os.access(path, os.W_OK):
-            logging.critical("You don't have write permissions on \""
-                             + self._path + "\" !")
-            sys.exit(2)
+            logger.warning("You don't have write permissions on \""
+                           + self._path + "\" !")
+            sys.exit(1)
 
         self._path = os.path.join(path, f)
 
@@ -70,16 +70,16 @@ class Img_info:
             if is_number(val):
                 self._resize.append(int(val))
             else:
-                logging.critical("In " + self._path + " \"resize: " + r
-                                 + "\" is incorrect !")
-                sys.exit(2)
+                logger.warning("In " + self._path + " \"resize: " + r
+                               + "\" is incorrect !")
+                sys.exit(1)
 
     def _set_time(self, t):
         if is_number(t):
             self._time = t
         else:
-            logging.critical("\"" + t + "\" is not a number gretter than 0 !")
-            sys.exit(2)
+            logger.warning("\"" + t + "\" is not a number gretter than 0 !")
+            sys.exit(1)
 
 
     crop   = property(_get_crop, _set_crop)

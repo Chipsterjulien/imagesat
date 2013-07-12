@@ -15,6 +15,8 @@ See the file LICENSE for copying permission.
 # Used http://www.python.org/dev/peps/pep-0314/ and
 # http://getpython3.com/diveintopython3/packaging.html
 #
+# https://pypi.python.org/pypi?%3Aaction=list_classifiers
+#
 # to wrote this script
 #------------------------
 
@@ -25,7 +27,7 @@ except ImportError:
     from distutils.core import setup, find_packages
 
 
-from Imagesat import *
+import Imagesat
 
 
 CLASSIFIERS = [
@@ -44,20 +46,21 @@ DATA_FILES = [('/etc/imagesat', ['cfg/imagesat_example.conf']),
               ('/usr/lib/systemd/system', ['cfg/imagesat.service'])]
 SCRIPTS = ['imagesat', ]
 
+
 setup(
-    name             = NAME,
-    version          = VERSION,
-    description      = DESCRIPTION,
-    long_description = LONG_DESCRIPTION,
-    author           = AUTHOR,
-    author_email     = AUTHOR_EMAIL,
-    url              = URL,
-    license          = LICENSE,
-    platforms        = PLATFORMS,
+    name             = Imagesat.__name__,
+    version          = Imagesat.__version__,
+    description      = Imagesat.__description__,
+    long_description = Imagesat.__long_description__,
+    author           = Imagesat.__author__,
+    author_email     = Imagesat.__author_email__,
+    url              = Imagesat.__url__,
+    license          = Imagesat.__license__,
+    platforms        = Imagesat.__platforms__,
     data_files       = DATA_FILES,
     packages         = find_packages(),
     include_package_data = True,
     scripts          = SCRIPTS,
-    requires         = ['requests', 'yaml', 'imaging', 'python (>=3.3)'],
+    requires         = ['requests', 'pyyaml', 'imaging', 'python (>=3.3)'],
     classifiers      = CLASSIFIERS,
 )

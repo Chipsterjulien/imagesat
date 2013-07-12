@@ -24,7 +24,7 @@ def download(url):
         page = requests.get(url)
     except requests.exceptions.ConnectionError:
         time.sleep(10)
-        # The only way to initalize correctly the internet connection
+        # The only way to reinitalize correctly the internet connection
         os.execl('/usr/bin/imagesat', 'imagesat')
 
     return page

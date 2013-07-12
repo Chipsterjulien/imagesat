@@ -1,5 +1,7 @@
 ** Changelog
 
+   v0.3.1 - Solve bigs mistakes that introduce with slit code in all files
+
    v0.3 - First changelog
         - Use python-requests instead of urllib
         - Rewrite of sleep function

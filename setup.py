@@ -26,9 +26,7 @@ try:
 except ImportError:
     from distutils.core import setup, find_packages
 
-
 import Imagesat
-
 
 CLASSIFIERS = [
     'Development Status :: 5 - Production/Stable',
@@ -43,6 +41,7 @@ CLASSIFIERS = [
 
 
 DATA_FILES = [('/etc/imagesat', ['cfg/imagesat_example.conf']),
+	      ('/var/log/imagesat', ['log/error.log']),
               ('/usr/lib/systemd/system', ['cfg/imagesat.service'])]
 SCRIPTS = ['imagesat', ]
 
